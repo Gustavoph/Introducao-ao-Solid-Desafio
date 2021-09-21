@@ -29,7 +29,6 @@ class UsersRepository implements IUsersRepository {
     });
 
     this.users.push(user);
-    console.log(user);
 
     return user;
   }
@@ -45,11 +44,19 @@ class UsersRepository implements IUsersRepository {
   }
 
   turnAdmin(receivedUser: User): User {
-    // Complete aqui
+    const userIndex = this.users.findIndex(
+      (user) => user.id === receivedUser.id
+    );
+
+    this.users[userIndex].admin = true;
+    this.users[userIndex].updated_at = new Date();
+
+    const user = this.users[userIndex];
+    return user;
   }
 
   list(): User[] {
-    // Complete aqui
+    return this.users;
   }
 }
 
